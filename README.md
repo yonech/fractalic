@@ -1,19 +1,16 @@
-# fractalic
+__Projekt:__ Fractalic
+__Krótki opis:__ Program graficzny pozwalający użytkownikowi rysować rozmaite fraktale definiowane rekurencyjne bez wiedzy programistycznej.
+__Skład zespołu:__ Aleksander Janczewski, Tomasz Kosmulski
+__Narzędzia:__ JavaFX
+__Repo:__ https://github.com/yonech/fractalic
+__Komunikacja:__ https://teams.microsoft.com/l/team/19%3adc83a72131d64dd39c5f49affc0cce04%40thread.tacv2/conversations?groupId=cf137d2f-f756-4fc4-b4e3-7153f6464a8c&tenantId=eb0e26eb-bfbe-47d2-9e90-ebd2426dbceb
 
-Projekt ma na celu utworzyć program graficzny umożliwiający w miarę wygodny i intuicyjny sposób rysowania fraktali definiowanych prostymi krokami rekurencyjnymi.
+__Projekt będzie zawierał:__
 
-Program będzie zawierał:
-* Komponenty typowe dla programów graficznych (importowanie, eksportowanie obrazków, obszar roboczy, itp.)
-* Narzędzie 'narysuj fraktal' działający następująco:
-    1. opcję wyboru fragmentu powielanego (prosta, łuk, obrazek)
-    2. opcję zdefiniowania kroku rekurencyjnego (tzn. o ile w każdej rekursji powiększy się liczba fragmentów, o ile będą mniejsze i gdzie względem oryginalnego fragmentu wylądują).
-    3. wybór głębokości rekursji
-    4. (?) Inne dodatkowe opjce definiujące krok rekursji np. zmiana koloru poszczególnych fragmentów (można ustalić w zależności od rozmiaru projektu)
+*Interfejs i funkcjonalność podobną do innych programów graficznych (m.in. obszar roboczy, możliwość importowania i eksportowania obrazków)
+*Narzędzie "Narysuj Fraktal" składający się z:
+    *Okienka/Pola w którym można utworzyć element powielany poprzez rekursję (fragment)
+    *Okienka/Pola w którym można zdefiniować dla każdego fragmentu krok rekurencyjny poprzez duplikowanie, obracanie i skalowanie tegoż bądź innych fragmentów. (Tzn. w kroku rekursji z czego w co ma się zamienić pojedynczy fragment)
+    *Wyboru głębokości rekursji
+    *Możliwości wybrania i przeciągnięcia przez główny obszar roboczy jednego z utworzonych fragmentów, aby narysować fraktal według zdefiniowanych powyższymi narzędziami zasad.
     
-
-    
-Opcje 1,2 powinny umożliwiać poprzez okienko/docker gdzie użytkownik jest w stanie odpowiednio utworzyć fragment powielany, ustawić/poprzesuwać i obracać te fragmenty.
-
-Po wybraniu opcji użytkownik powinien być w stanie przeciągnąć mysz po ekranie aby narysować fraktal według ustalonych preferencji.
-
-Użytkownik może utworzyć wiele różnych 'fragmentów' i definiować  krok rekurencyjny dla każdego z osobna (np. jeżeli mamy czerwoną kreskę, to zastąp ją łamaną z dwoma czarnymi kreskami, a jeśli mamy czarną kreskę, to zastąp ją inną łamaną z dwoma czerwonymi i jedną czarną kreską) 
