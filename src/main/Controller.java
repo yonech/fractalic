@@ -5,8 +5,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ColorPicker;
+
+
+import javafx.scene.control.MenuBar;
+import javafx.stage.Stage;
+import main.control.menu.MainMenuController;
 import main.model.fractal.FractalSetting;
-import main.model.fractal.Fragment;
 import main.model.test.exampleFractal;
 
 
@@ -15,14 +19,28 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
 
-    @FXML
-    public Canvas canvas;
+    public Stage primaryStage;
+    public void setPrimaryStage(Stage primaryStage){
+        this.primaryStage = primaryStage;
+    }
+    // - Includes
+
+    @FXML private MainMenuController mainMenuController;
+
+
+    // Canvas and drawing area
+    @FXML public Canvas canvas;
+    @FXML public ColorPicker colorPicker;
+
+    GraphicsContext graphicsContext;
+
+
 
     @FXML
-    public ColorPicker colorPicker;
-    GraphicsContext graphicsContext;
-    @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        System.out.println(mainMenuController);
+        mainMenuController.injectController(this);
+
         graphicsContext= canvas.getGraphicsContext2D();
 
         //graphicsContext.strokeLine(0,0,100,200);
@@ -37,6 +55,7 @@ public class Controller implements Initializable {
 
         });
     }
+
 
 
 }
