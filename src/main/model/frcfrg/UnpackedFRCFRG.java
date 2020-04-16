@@ -18,7 +18,7 @@ public class UnpackedFRCFRG {
         if(ft!=null)  return ft;
 
         File sourceFile = new File("src/resources/fragments/" + id + ".frcfrg");
-        System.out.println(sourceFile.exists());
+       //System.out.println(sourceFile.exists());
 
         ft = new FragmentType();
         unpacked.put(id,ft);
@@ -28,7 +28,7 @@ public class UnpackedFRCFRG {
     };
 
     void createFragmentType(File sourceFile, String id, FragmentType ft) throws FileNotFoundException {
-        System.out.println(sourceFile);
+        //System.out.println(sourceFile);
 
 
         Scanner scanner = new Scanner(sourceFile);
