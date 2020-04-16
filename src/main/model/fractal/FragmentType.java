@@ -1,6 +1,9 @@
 package main.model.fractal;
 
 
+import javafx.scene.paint.Color;
+
+import javax.swing.*;
 import java.util.Vector;
 
 /**
@@ -11,9 +14,19 @@ import java.util.Vector;
 
 public class FragmentType {
 
+
     // ? TYPE for draw pattern
 
     public Vector<Fragment> recurStep;
+    public String name="???";
+    public Color color=Color.BLACK;
+
+    public static final FragmentType defaultFragmentType = new FragmentType();
+
+    // TODO
+        // shape
+        // start
+        // end
 
     // Default Constructor, doesn't change on recursion
     public FragmentType()
@@ -21,6 +34,8 @@ public class FragmentType {
         recurStep = new Vector<>();
         recurStep.add(new Fragment(this));
     };
+
+
 
     /*
     public FragmentType (double... points) throws BadPolyLineException

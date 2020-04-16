@@ -32,10 +32,26 @@ public class MainMenuController implements Initializable {
         this.controller = controller;
     }
 
+    void saveCanvas(File chosenFile)
+    {
+        try {
+            WritableImage writableImage = new WritableImage( (int) controller.canvas.getWidth(), (int) controller.canvas.getHeight());
+            controller.canvas.snapshot(null,writableImage);
+            RenderedImage renderedImage = SwingFXUtils.fromFXImage(writableImage,null);
+            ImageIO.write(renderedImage, "png", chosenFile);
+
+            saveToFile = chosenFile;
+
+        } catch(IOException eio){
+            Logger.getLogger(MainMenuController.class.getName()).log(Level.SEVERE,null,eio);
+        }
+
+    };
+
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        System.out.println(controller);
+
         menuOptFileSaveAs.setOnAction(actionEvent -> {
             FileChooser fileChooser = new FileChooser();
 
@@ -44,23 +60,13 @@ public class MainMenuController implements Initializable {
 
             File chosenFile = fileChooser.showSaveDialog(controller.primaryStage);
 
-            if(chosenFile != null)
-            {
-                try {
-                    WritableImage writableImage = new WritableImage( (int) controller.canvas.getWidth(), (int) controller.canvas.getHeight());
-                    controller.canvas.snapshot(null,writableImage);
-                    RenderedImage renderedImage = SwingFXUtils.fromFXImage(writableImage,null);
-                    ImageIO.write(renderedImage, "png", chosenFile);
-
-                    saveToFile = chosenFile;
-
-                } catch(IOException eio){
-                    Logger.getLogger(MainMenuController.class.getName()).log(Level.SEVERE,null,eio);
-                }
-            };
+            if(chosenFile != null) saveCanvas(chosenFile);
 
         });
-
+        menuOptFileSave.setOnAction(actionEvent -> {
+            if(saveToFile==null) menuOptFileSaveAs.getOnAction();
+            else    saveCanvas(saveToFile);
+        });
 
     }
 

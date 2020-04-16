@@ -1,6 +1,7 @@
 package main.model.fractal;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 import java.awt.*;
 
@@ -35,7 +36,7 @@ public class FractalSetting {
         if(depth==this.depth)
         {
             /** StrokeLine needs to be replaced with the option to place an image or any shape   */
-
+            space.setStroke(frag.info.color==null?Color.BLUE:frag.info.color);
             space.strokeLine(frag.spanFrom.real, frag.spanFrom.imag, frag.spanTo.real, frag.spanTo.imag);
             return;
         };
