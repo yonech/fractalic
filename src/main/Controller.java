@@ -33,7 +33,7 @@ public class Controller implements Initializable {
     @FXML public Canvas canvas;
     @FXML public ColorPicker colorPicker;
 
-    GraphicsContext graphicsContext;
+    public GraphicsContext graphicsContext;
 
     double originX=0, originY=0;
 
@@ -51,7 +51,7 @@ public class Controller implements Initializable {
         //canvas.setOnMouseReleased( e-> fractalEnv.drawFractal(exampleFractal.KochSnowflakeFractal(originX,originY,e.getX(),e.getY())) );
         canvas.setOnMouseReleased( e-> {
             try {
-                fractalEnv.drawFractal(new Fragment(originX,originY,e.getX(),e.getY(),unpackedFRCFRG.getByName("squares1")));
+                fractalEnv.drawFractal(new Fragment(originX,originY,e.getX(),e.getY(),unpackedFRCFRG.getByName("expcurve")));
             } catch (FileNotFoundException ignored){};
         });
 

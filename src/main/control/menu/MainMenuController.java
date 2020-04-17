@@ -1,5 +1,6 @@
 package main.control.menu;
 
+import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -27,6 +28,12 @@ public class MainMenuController implements Initializable {
     MenuItem menuOptFileSaveAs, menuOptFileSave;
     File saveToFile = null;
 
+
+    @FXML MenuItem menuOptFileNew;
+
+    @FXML MenuItem menuOptFileClose;
+
+    @FXML MenuItem menuOptToolsExample;
 
     public void injectController(Controller controller) {
         this.controller = controller;
@@ -68,6 +75,11 @@ public class MainMenuController implements Initializable {
             else    saveCanvas(saveToFile);
         });
 
+
+        menuOptFileClose.setOnAction(actionEvent -> Platform.exit());
+
+        // TODO make this different, Edit.Delete should do this
+        menuOptFileNew.setOnAction(actionEvent -> controller.graphicsContext.clearRect(0,0,controller.canvas.getWidth(),controller.canvas.getHeight()));
     }
 
 }
