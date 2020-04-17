@@ -15,7 +15,7 @@ import java.awt.*;
 
 public class FractalSetting {
 
-    public int depth=5;
+    public int depth=4;
 
     GraphicsContext space;
 

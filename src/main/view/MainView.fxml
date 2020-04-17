@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="main.Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="main.Controller">
    <center>
-      <Canvas fx:id="canvas" height="300.0" width="500.0" BorderPane.alignment="CENTER" />
+      <Canvas fx:id="canvas" height="600.0" width="800.0" BorderPane.alignment="CENTER" />
    </center>
    <top>
       <VBox BorderPane.alignment="CENTER">
