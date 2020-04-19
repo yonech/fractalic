@@ -13,6 +13,7 @@ import javafx.scene.image.WritableImage;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import main.Controller;
+import main.control.menu.examples.ExamplesController;
 
 import javax.imageio.ImageIO;
 import java.awt.image.RenderedImage;
@@ -66,6 +67,8 @@ public class MainMenuController implements Initializable {
                 FXMLLoader loader= new FXMLLoader();
                 loader.setLocation(MainMenuController.class.getResource("examples/ExamplesView.fxml"));
                 Parent root= (Parent) loader.load();
+                ExamplesController examplesController=loader.getController();
+                examplesController.injectController(controller);
                 Stage stage=new Stage();
                 stage.setTitle("Examples");
                 stage.setScene(new Scene(root));
