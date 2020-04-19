@@ -1,0 +1,8 @@
+Two Fragments Combined Piece 1
+
+[ COLOR #d86d36 ]
+[ PATTERN
+   multi1   0        0       0.4     0.2
+   multi2   0.4      0.2     0.6     -0.2
+   multi1   0.6      -0.2    1.0     0.0
+]

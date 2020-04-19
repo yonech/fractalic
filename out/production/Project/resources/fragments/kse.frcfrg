@@ -1,0 +1,20 @@
+Koch Snowflake Edge
+
+Comments can be written anywhere, except for the first line and in square brackets // [ ]
+First row is the proper example name
+
+[ COLOR      #61522f ]
+// Default [ SHAPE      LINE ]
+// Default [ START 0.000000 0.000000 ]
+// Default [ END   1.000000 0.000000 ]
+
+[ PATTERN    
+    @       0.000000 0.000000 0.333333 0.000000
+    @       0.333333 0.000000 0.500000 0.288675
+    @       0.500000 0.288675 0.666667 0.000000
+    @       0.666667 0.000000 1.000000 0.000000
+]
+
+
+// Future [ CONDITION never, maxdepth, notoffcanvas, nottiny  ]
+Asks when should we call recursion on our fragment

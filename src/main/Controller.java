@@ -34,7 +34,7 @@ public class Controller implements Initializable {
     @FXML public ColorPicker colorPicker;
 
     public GraphicsContext graphicsContext;
-
+    public String chosenFractal;
     double originX=0, originY=0;
 
     @FXML
@@ -44,16 +44,17 @@ public class Controller implements Initializable {
 
         graphicsContext= canvas.getGraphicsContext2D();
         //graphicsContext.strokeLine(0,0,100,200);
-        FractalSetting fractalEnv = new FractalSetting(graphicsContext);
-        UnpackedFRCFRG unpackedFRCFRG = new UnpackedFRCFRG();
+        //FractalSetting fractalEnv = new FractalSetting(graphicsContext);
+        //UnpackedFRCFRG unpackedFRCFRG = new UnpackedFRCFRG();
 
         canvas.setOnMousePressed( e-> {originX=e.getX(); originY=e.getY(); });
         //canvas.setOnMouseReleased( e-> fractalEnv.drawFractal(exampleFractal.KochSnowflakeFractal(originX,originY,e.getX(),e.getY())) );
-        canvas.setOnMouseReleased( e-> {
+        setChosenFractal("expcurve");
+        /*canvas.setOnMouseReleased( e-> {
             try {
                 fractalEnv.drawFractal(new Fragment(originX,originY,e.getX(),e.getY(),unpackedFRCFRG.getByName("expcurve")));
             } catch (FileNotFoundException ignored){};
-        });
+        });*/
 
         /*
 
@@ -67,7 +68,16 @@ public class Controller implements Initializable {
 
          */
     }
-
+    public void setChosenFractal(String fractal){
+        chosenFractal=fractal;
+        FractalSetting fractalEnv = new FractalSetting(graphicsContext);
+        UnpackedFRCFRG unpackedFRCFRG = new UnpackedFRCFRG();
+        canvas.setOnMouseReleased( e-> {
+            try {
+                fractalEnv.drawFractal(new Fragment(originX,originY,e.getX(),e.getY(),unpackedFRCFRG.getByName(chosenFractal)));
+            } catch (FileNotFoundException ignored){};
+        });
+    }
 
 
 }

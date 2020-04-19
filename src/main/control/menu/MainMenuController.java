@@ -3,11 +3,15 @@ package main.control.menu;
 import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.WritableImage;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import main.Controller;
 
 import javax.imageio.ImageIO;
@@ -57,7 +61,21 @@ public class MainMenuController implements Initializable {
 
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        menuOptToolsExample.setOnAction(actionEvent -> {
+            try{
+                FXMLLoader loader= new FXMLLoader();
+                loader.setLocation(MainMenuController.class.getResource("examples/ExamplesView.fxml"));
+                Parent root= (Parent) loader.load();
+                Stage stage=new Stage();
+                stage.setTitle("Examples");
+                stage.setScene(new Scene(root));
+                stage.show();
+                //TODO inject field controller into examplesController
+            }catch(Exception e){
+                System.out.println("Unknown error");
+            }
 
+        });
 
         menuOptFileSaveAs.setOnAction(actionEvent -> {
             FileChooser fileChooser = new FileChooser();

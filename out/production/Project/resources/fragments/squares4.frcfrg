@@ -1,0 +1,31 @@
+Elaborate example with 4 multicolored squares
+
+# Square 4 Orange
+
+[ COLOR #d86d36 ]
+
+
+[ PATTERN
+
+    squares1    0       0       0.25    0
+   // squares1    0.25    0       0.25    -0.25
+    squares1    0.25    -0.25   0       -0.25
+  //  squares1    0       -0.25   0       0
+
+   // squares2    0.5     -0.25   0.75    -0.25
+    squares2    0.75    -0.25   0.75    -0.5
+   // squares2    0.75    -0.5    0.5     -0.5
+    squares2    0.5     -0.5    0.5     -0.25
+
+ //   squares3    0.75     0.25   1        0.25
+    squares3    1        0.25   1        0
+ //   squares3    1        0      0.75     0
+    squares3    0.75     0      0.75     0.25
+
+    squares4    0.25     0.5    0.5      0.5
+   // squares4    0.5      0.5    0.5      0.25
+    squares4    0.5      0.25   0.25     0.25
+   // squares4    0.25     0.25   0.25     0.5
+
+
+]
