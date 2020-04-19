@@ -1,5 +1,6 @@
 package main;
 
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
@@ -7,6 +8,9 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ColorPicker;
 
 
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import main.control.menu.MainMenuController;
 import main.model.fractal.FractalSetting;
@@ -37,19 +41,31 @@ public class Controller implements Initializable {
     public String chosenFractal;
     double originX=0, originY=0;
 
+    @FXML public Spinner<Integer> depthSpinner;
+
+    FractalSetting fractalEnv;
+
+
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+
         mainMenuController.injectController(this);
 
+
+        //dragLine.setOnMouseDragged(e->{dragLine.se});
+        //depthSpinner.getValueFactory().setValue(5);
+
         graphicsContext= canvas.getGraphicsContext2D();
+        fractalEnv = new FractalSetting(graphicsContext);
+
         //graphicsContext.strokeLine(0,0,100,200);
         //FractalSetting fractalEnv = new FractalSetting(graphicsContext);
         //UnpackedFRCFRG unpackedFRCFRG = new UnpackedFRCFRG();
-
         canvas.setOnMousePressed( e-> {originX=e.getX(); originY=e.getY(); });
+
         //canvas.setOnMouseReleased( e-> fractalEnv.drawFractal(exampleFractal.KochSnowflakeFractal(originX,originY,e.getX(),e.getY())) );
-        setChosenFractal("expcurve");
+        setChosenFractal("irregular");
         /*canvas.setOnMouseReleased( e-> {
             try {
                 fractalEnv.drawFractal(new Fragment(originX,originY,e.getX(),e.getY(),unpackedFRCFRG.getByName("expcurve")));
@@ -67,17 +83,39 @@ public class Controller implements Initializable {
         });
 
          */
+        SpinnerValueFactory.IntegerSpinnerValueFactory valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10);
+        depthSpinner.setValueFactory(valueFactory);
+        depthSpinner.setEditable(true);
+        depthSpinner.valueProperty().addListener(this::handleSpin);
+
+
+
+
     }
+
+
+    private void handleSpin(ObservableValue<?> observableValue, Integer oldValue, Integer newValue) {
+        try {
+            if (newValue == null)
+                depthSpinner.getValueFactory().setValue(oldValue);
+
+        } catch (Exception ignored) { }
+    }
+
+
+
     public void setChosenFractal(String fractal){
         chosenFractal=fractal;
-        FractalSetting fractalEnv = new FractalSetting(graphicsContext);
+
         UnpackedFRCFRG unpackedFRCFRG = new UnpackedFRCFRG();
         canvas.setOnMouseReleased( e-> {
             try {
+                fractalEnv.setDepth(depthSpinner.getValueFactory().getValue());
                 fractalEnv.drawFractal(new Fragment(originX,originY,e.getX(),e.getY(),unpackedFRCFRG.getByName(chosenFractal)));
             } catch (FileNotFoundException ignored){};
         });
     }
+
 
 
 }

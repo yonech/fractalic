@@ -23,6 +23,7 @@ public class FractalSetting {
     {
         this.space = space;
     };
+    public void setDepth(int x){ depth = x; }
 
     public void drawFractal(Fragment start)
     {
@@ -33,9 +34,9 @@ public class FractalSetting {
     private void drawingFractal(int depth, Fragment frag)
     {
 
-        if(depth==this.depth)
+        if(depth>=this.depth)
         {
-            /** StrokeLine needs to be replaced with the option to place an image or any shape   */
+            //TODO StrokeLine needs to be replaced with the option to place an image or any shape
             space.setStroke(frag.info.color==null?Color.BLUE:frag.info.color);
             space.strokeLine(frag.spanFrom.real, frag.spanFrom.imag, frag.spanTo.real, frag.spanTo.imag);
             return;
