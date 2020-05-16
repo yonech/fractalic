@@ -20,6 +20,11 @@
                   <KeyCodeCombination alt="UP" code="S" control="ANY" meta="UP" shift="ANY" shortcut="UP" />
                </accelerator>
             </MenuItem>
+            <MenuItem id="MenuFileSaveAs" fx:id="menuOptFileSettings" mnemonicParsing="false" text="Settings">
+               <accelerator>
+                  <KeyCodeCombination alt="UP" code="S" control="ANY" meta="UP" shift="ANY" shortcut="UP" />
+               </accelerator>
+            </MenuItem>
             <MenuItem fx:id="menuOptFileClose" mnemonicParsing="false" text="Close">
                <accelerator>
                   <KeyCodeCombination alt="UP" code="S" control="ANY" meta="UP" shift="ANY" shortcut="UP" />
@@ -32,6 +37,11 @@
             <MenuItem mnemonicParsing="false" text="Delete" />
          </items>
       </Menu>
+      <Menu mnemonicParsing="false" text="Select">
+        <items>
+          <MenuItem fx:id="menuOptToolsExample" mnemonicParsing="false" text="Fractal" />
+        </items>
+      </Menu>
       <Menu mnemonicParsing="false" text="Tools">
          <items>
             <MenuItem mnemonicParsing="false" text="Action 1" />
@@ -41,11 +51,6 @@
          <items>
             <MenuItem mnemonicParsing="false" text="About" />
          </items>
-      </Menu>
-      <Menu mnemonicParsing="false" text="Tools">
-        <items>
-          <MenuItem fx:id="menuOptToolsExample" mnemonicParsing="false" text="Examples" />
-        </items>
       </Menu>
   </menus>
 </MenuBar>

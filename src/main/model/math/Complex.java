@@ -18,6 +18,8 @@ public class Complex {
     public static Complex plus(Complex A, Complex B)    { return new Complex(A.real+B.real,                 A.imag+B.imag               ); }
     public static Complex minus(Complex A, Complex B)   { return new Complex(A.real-B.real,                 A.imag-B.imag               ); }
     public static Complex times(Complex A, Complex B)   { return new Complex(A.real*B.real-A.imag*B.imag,   A.imag*B.real+A.real*B.imag ); }
+    public static Complex divby(Complex A, double b)    { return new Complex(A.real/b,                      A.imag/b                    ); }
+    public static Complex divby(Complex A, Complex B)   { return divby(new Complex(A.real*B.real+A.imag*B.imag, A.imag*B.real - A.real*B.imag), B.imag*B.imag + B.real*B.real);}
 
     @Override
     public String toString() { return real + "+" + imag + "i"; };

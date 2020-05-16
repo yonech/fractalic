@@ -3,6 +3,8 @@ package main;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
+import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ColorPicker;
@@ -10,6 +12,8 @@ import javafx.scene.control.ColorPicker;
 
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.input.MouseDragEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import main.control.menu.MainMenuController;
@@ -18,6 +22,7 @@ import main.model.fractal.Fragment;
 import main.model.frcfrg.UnpackedFRCFRG;
 
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -33,9 +38,14 @@ public class Controller implements Initializable {
     @FXML private MainMenuController mainMenuController;
 
 
+
     // Canvas and drawing area
+    @FXML public Pane canvasPane;
     @FXML public Canvas canvas;
     @FXML public ColorPicker colorPicker;
+
+    @FXML public Pane indicatorPane;
+
 
     public GraphicsContext graphicsContext;
     public String chosenFractal;
@@ -46,12 +56,12 @@ public class Controller implements Initializable {
     FractalSetting fractalEnv;
 
 
+
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
 
         mainMenuController.injectController(this);
-
 
         //dragLine.setOnMouseDragged(e->{dragLine.se});
         //depthSpinner.getValueFactory().setValue(5);
@@ -62,7 +72,18 @@ public class Controller implements Initializable {
         //graphicsContext.strokeLine(0,0,100,200);
         //FractalSetting fractalEnv = new FractalSetting(graphicsContext);
         //UnpackedFRCFRG unpackedFRCFRG = new UnpackedFRCFRG();
-        canvas.setOnMousePressed( e-> {originX=e.getX(); originY=e.getY(); });
+
+        canvasPane.setOnMousePressed( e-> {
+            originX=e.getX(); originY=e.getY();
+
+        });
+
+
+        canvasPane.setOnMouseDragged(e->{
+            indicatorPane.getChildren().clear();
+
+            indicatorPane.getChildren().add(new Line(originX,originY,e.getX(),e.getY()));
+        });
 
         //canvas.setOnMouseReleased( e-> fractalEnv.drawFractal(exampleFractal.KochSnowflakeFractal(originX,originY,e.getX(),e.getY())) );
         setChosenFractal("irregular");
@@ -108,7 +129,9 @@ public class Controller implements Initializable {
         chosenFractal=fractal;
 
         UnpackedFRCFRG unpackedFRCFRG = new UnpackedFRCFRG();
+
         canvas.setOnMouseReleased( e-> {
+            indicatorPane.getChildren().clear();
             try {
                 fractalEnv.setDepth(depthSpinner.getValueFactory().getValue());
                 fractalEnv.drawFractal(new Fragment(originX,originY,e.getX(),e.getY(),unpackedFRCFRG.getByName(chosenFractal)));
