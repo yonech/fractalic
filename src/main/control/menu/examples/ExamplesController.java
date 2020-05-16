@@ -3,14 +3,20 @@ package main.control.menu.examples;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import main.Controller;
+import main.model.fractal.FractalSetting;
+import main.model.fractal.Fragment;
+import main.model.frcfrg.UnpackedFRCFRG;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
 import java.net.URL;
 import java.util.ArrayList;
@@ -22,6 +28,10 @@ public class ExamplesController implements Initializable {
     VBox examplesList;
     @FXML
     Button examplesSelect;
+    @FXML
+    Canvas canvas;
+    GraphicsContext graphicsContext;
+    FractalSetting fractalEnv;
 
     ArrayList<RadioButton> buttonList;
     ToggleGroup group;
@@ -33,6 +43,8 @@ public class ExamplesController implements Initializable {
         buttonList = new ArrayList<>();
         boolean selection=true;
         group=new ToggleGroup();
+        graphicsContext=canvas.getGraphicsContext2D();
+        fractalEnv=new FractalSetting(graphicsContext);
 
         exampleFolder= new File("src/resources/fragments");
         if(!exampleFolder.exists()) System.out.println("File not open.");
@@ -43,6 +55,19 @@ public class ExamplesController implements Initializable {
         for(String filename : files){
             RadioButton button=new RadioButton(filename.substring(0,filename.length()-7));
             button.setToggleGroup(group);
+            button.setOnAction(actionEvent -> {
+                /*
+                int i;
+                System.out.println(((RadioButton)group.getSelectedToggle()).getText());
+                for(i=0;i<buttonList.size();i++){
+                    if(buttonList.get(i).isSelected()){
+                        System.out.println(buttonList.get(i).getText());
+                    }
+                }
+
+                 */
+                previewFractal(((RadioButton)group.getSelectedToggle()).getText());
+            });
             button.setSelected(selection);
             if(selection) selection=false;
             buttonList.add(button);
@@ -68,8 +93,17 @@ public class ExamplesController implements Initializable {
             Stage stage= (Stage) examplesSelect.getScene().getWindow();
             stage.close();
         });
+        if(buttonList.size()>0) previewFractal(buttonList.get(0).getText());
     }
     public void injectController(Controller controller) {
         this.controller = controller;
+    }
+    public void previewFractal(String fractal){
+        graphicsContext.clearRect(0,0,canvas.getWidth(),canvas.getHeight());
+        UnpackedFRCFRG unpackedFRCFRG=new UnpackedFRCFRG();
+        try{
+            fractalEnv.setDepth(4);
+            fractalEnv.drawFractal(new Fragment(150,200,350 , 200,unpackedFRCFRG.getByName(fractal)));
+        }catch(FileNotFoundException  ignored){};
     }
 }

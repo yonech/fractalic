@@ -73,9 +73,10 @@ public class MainMenuController implements Initializable {
                 stage.setTitle("Examples");
                 stage.setScene(new Scene(root));
                 stage.show();
-                //TODO inject field controller into examplesController
+
             }catch(Exception e){
                 System.out.println("Unknown error");
+                e.printStackTrace();
             }
 
         });
