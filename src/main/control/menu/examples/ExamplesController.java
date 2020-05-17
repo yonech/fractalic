@@ -53,7 +53,7 @@ public class ExamplesController implements Initializable {
 
     private MakingFrgController makingFrgController;
 
-    @FXML Pane display;
+    @FXML public Pane display;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -115,33 +115,31 @@ public class ExamplesController implements Initializable {
 
         // Edit pattern of fragment
         examplesEdit.setOnAction(e->{
-            File loc;
+            File loc = null;
             for (RadioButton r: buttonList) if(r.isSelected()) loc = new File("src/resources/fragments/" + r.getText() + ".frcfrg");
-
-            makingFrgController = new MakingFrgController();
             BorderPane newPane = null;
-            try {
-                FXMLLoader loader= new FXMLLoader();
-                System.out.println(MakingFrgController.class.getResource("MakingFrgView.fxml"));
-                System.out.println(MakingFrgController.class.getResource("MakingFrgView.fxml"));
-                System.out.println(ExamplesController.class.getResource("/src/main/control/making/MakingFrgView.fxml"));
-                System.out.println(ExamplesController.class.getResource("src/main/control/making/MakingFrgView.fxml"));
-                System.out.println(Controller.class.getResource("/control/making/MakingFrgView.fxml"));
-                System.out.println(Controller.class.getResource("control/making/MakingFrgView.fxml"));
+            if(loc!=null)
+                try {
+                    FXMLLoader loader= new FXMLLoader();
+
+                    loader.setLocation(MakingFrgController.class.getResource("MakingFrgView.fxml"));
+                    newPane = loader.load();
+                    System.out.println(newPane);
+
+                    makingFrgController=loader.getController();
+                    //System.out.println((String) loader.getController());
+                    makingFrgController.injectController(this);
+                    makingFrgController.setName(loc.getName());
+                    makingFrgController.loadFragments(loc);
+
+                    display.getChildren().clear();
+                    display.getChildren().add(newPane);
 
 
-                loader.setLocation(MakingFrgController.class.getResource("MakingFrgView.fxml"));
-                newPane = loader.load();
-                System.out.println(newPane);
 
-                //TODO var injection
-
-                display.getChildren().clear();
-                display.getChildren().add(newPane);
-
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
         });
     }
 
@@ -150,6 +148,10 @@ public class ExamplesController implements Initializable {
         this.controller = controller;
     }
 
+    public void returnToCanvas() {
+        display.getChildren().clear();
+        display.getChildren().add(canvas);
+    }
 
     public void previewFractal(String fractal){
         graphicsContext.clearRect(0,0,canvas.getWidth(),canvas.getHeight());

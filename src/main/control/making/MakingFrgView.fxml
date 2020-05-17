@@ -5,13 +5,12 @@
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.control.making.MakingFrgController">
    <center>
-      <Region fx:id="designSpace" prefHeight="375.0" prefWidth="559.0" style="-fx-border-width: 3; -fx-border-color: #94b0c2;" BorderPane.alignment="CENTER" />
+      <Pane fx:id="designPane" style="-fx-border-width: 3; -fx-border-color: #94b0c2;" BorderPane.alignment="CENTER" />
    </center>
    <bottom>
       <AnchorPane BorderPane.alignment="TOP_CENTER">

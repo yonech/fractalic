@@ -43,4 +43,13 @@ public class Fragment {
         Complex retTo = Complex.plus(spanFrom,Complex.times(stepEl.spanTo,span));
         return new Fragment(retFrom,retTo,stepEl.info);
     }
+
+    public Fragment newReverseFragment(Fragment result)
+    {
+        Complex span = Complex.minus(spanTo,spanFrom);
+        Complex retFrom = Complex.divby(Complex.minus(result.spanFrom, spanFrom),span);
+        Complex retTo = Complex.divby(Complex.minus(result.spanTo, spanFrom),span);
+
+        return new Fragment(retFrom, retTo, result.info);
+    }
 }

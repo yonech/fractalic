@@ -21,6 +21,7 @@ public class UnpackedFRCFRG {
        //System.out.println(sourceFile.exists());
 
         ft = new FragmentType();
+        ft.name = id;
         unpacked.put(id,ft);
 
         createFragmentType(sourceFile,id,ft);
