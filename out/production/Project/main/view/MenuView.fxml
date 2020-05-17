@@ -37,7 +37,7 @@
             <MenuItem mnemonicParsing="false" text="Delete" />
          </items>
       </Menu>
-      <Menu mnemonicParsing="false" text="Insert">
+      <Menu mnemonicParsing="false" text="Select">
         <items>
           <MenuItem fx:id="menuOptToolsExample" mnemonicParsing="false" text="Fractal" />
         </items>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.text.Text?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <Region fx:id="designSpace" prefHeight="375.0" prefWidth="559.0" style="-fx-border-width: 3; -fx-border-color: #94b0c2;" BorderPane.alignment="CENTER" />
+   </center>
+   <bottom>
+      <AnchorPane BorderPane.alignment="TOP_CENTER">
+         <children>
+            <Button fx:id="makingSave" layoutX="20.0" mnemonicParsing="false" text="Save" />
+            <ColorPicker fx:id="colorSelection" layoutX="87.0" />
+            <CheckBox fx:id="checkBoxGrid" layoutX="245.0" layoutY="4.0" mnemonicParsing="false" text="Show grid" />
+            <CheckBox fx:id="checkBoxLabels" layoutX="357.0" layoutY="4.0" mnemonicParsing="false" text="Label segments" />
+         </children>
+      </AnchorPane>
+   </bottom>
+   <top>
+      <Text fx:id="fragmentName" strokeType="OUTSIDE" strokeWidth="0.0" text="Fragment name" BorderPane.alignment="CENTER" />
+   </top>
+</BorderPane>

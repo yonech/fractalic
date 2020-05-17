@@ -83,6 +83,7 @@ public class Controller implements Initializable {
             indicatorPane.getChildren().clear();
 
             indicatorPane.getChildren().add(new Line(originX,originY,e.getX(),e.getY()));
+
         });
 
         //canvas.setOnMouseReleased( e-> fractalEnv.drawFractal(exampleFractal.KochSnowflakeFractal(originX,originY,e.getX(),e.getY())) );
