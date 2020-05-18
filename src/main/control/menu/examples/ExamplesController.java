@@ -106,43 +106,41 @@ public class ExamplesController implements Initializable {
        // Removing existing fragments
 
         examplesRemove.setOnAction(e->{
-            for (RadioButton r: buttonList) if(r.isSelected()) {
-                File file = new File("src/resources/fragments/" + r.getText() + ".frcfrg");
-                if(file.exists())  file.delete();
-            }
+            File file = new File("src/resources/fragments/" + getSelectedFrg().getText() + ".frcfrg");
+            if(file.exists())  file.delete();
             makeButtonList();
         });
 
         // Edit pattern of fragment
         examplesEdit.setOnAction(e->{
-            File loc = null;
-            for (RadioButton r: buttonList) if(r.isSelected()) loc = new File("src/resources/fragments/" + r.getText() + ".frcfrg");
+            File loc =  new File("src/resources/fragments/" + getSelectedFrg().getText() + ".frcfrg");
             BorderPane newPane = null;
-            if(loc!=null)
-                try {
-                    FXMLLoader loader= new FXMLLoader();
+            try {
+                FXMLLoader loader= new FXMLLoader();
 
-                    loader.setLocation(MakingFrgController.class.getResource("MakingFrgView.fxml"));
-                    newPane = loader.load();
-                    System.out.println(newPane);
+                loader.setLocation(MakingFrgController.class.getResource("MakingFrgView.fxml"));
+                newPane = loader.load();
 
-                    makingFrgController=loader.getController();
-                    //System.out.println((String) loader.getController());
-                    makingFrgController.injectController(this);
-                    makingFrgController.setName(loc.getName());
-                    makingFrgController.loadFragments(loc);
+                makingFrgController=loader.getController();
+                //System.out.println((String) loader.getController());
+                makingFrgController.injectController(this);
+                makingFrgController.loadFragments(loc);
 
-                    display.getChildren().clear();
-                    display.getChildren().add(newPane);
+                display.getChildren().clear();
+                display.getChildren().add(newPane);
 
 
 
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         });
     }
 
+    public RadioButton getSelectedFrg() {
+        for (RadioButton r: buttonList) if(r.isSelected()) return r;
+        return null;
+    }
 
     public void injectController(Controller controller) {
         this.controller = controller;
@@ -151,6 +149,7 @@ public class ExamplesController implements Initializable {
     public void returnToCanvas() {
         display.getChildren().clear();
         display.getChildren().add(canvas);
+        previewFractal(getSelectedFrg().getText());
     }
 
     public void previewFractal(String fractal){

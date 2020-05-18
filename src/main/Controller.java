@@ -87,7 +87,7 @@ public class Controller implements Initializable {
         });
 
         //canvas.setOnMouseReleased( e-> fractalEnv.drawFractal(exampleFractal.KochSnowflakeFractal(originX,originY,e.getX(),e.getY())) );
-        setChosenFractal("irregular");
+        setChosenFractal("kochSnowflakeEdge");
         /*canvas.setOnMouseReleased( e-> {
             try {
                 fractalEnv.drawFractal(new Fragment(originX,originY,e.getX(),e.getY(),unpackedFRCFRG.getByName("expcurve")));

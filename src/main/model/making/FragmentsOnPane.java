@@ -7,11 +7,15 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import main.model.fractal.Fragment;
 import main.model.fractal.FragmentType;
+import main.model.math.Complex;
+import main.model.math.Geometric;
 
 import java.util.ArrayList;
 
 public class FragmentsOnPane {
 
+
+    final static double deleteRange = 10;
 
     Circle startOf = new Circle(5.0, Color.web("#b13e53"));
     Circle endOf = new Circle(5.0, Color.web("#3b5dc9"));
@@ -65,5 +69,25 @@ public class FragmentsOnPane {
         return base;
     };
 
+    public void deleteNearest(double px, double py)
+    {
+        Fragment nearest = null;
+        double bestd=deleteRange;
+        for(Fragment s : pieces) {
+            double d = Geometric.dist(s,new Complex(px,py));
+            if(d < bestd) {
+                nearest=s;
+                bestd=d;
+            }
+        }
+        if(nearest!=null) pieces.remove(nearest);
+        refreshPane();
+    };
+
+    public void add(Fragment x)
+    {
+        pieces.add(x);
+        refreshPane();
+    };
 
 }

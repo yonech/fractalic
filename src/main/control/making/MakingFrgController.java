@@ -6,7 +6,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ColorPicker;
+import javafx.scene.control.RadioButton;
 import javafx.scene.input.MouseButton;
+import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
@@ -30,7 +32,7 @@ import java.util.ResourceBundle;
 
 public class MakingFrgController implements Initializable {
 
-    final static double deleteRange = 10;
+
 
     double originX, originY;
 
@@ -48,6 +50,7 @@ public class MakingFrgController implements Initializable {
 
     // design Space
     @FXML Pane designPane;
+    Line indicatorLine;
 
     UnpackedFRCFRG unpacked;
     FragmentsOnPane fop;
@@ -56,12 +59,12 @@ public class MakingFrgController implements Initializable {
         this.examplesController = controller;
 
     }
-    public void setName(String name){ fragmentName.setText(name); }
     public void loadFragments(File w) {
         workingOn = w;
+        fragmentName.setText(workingOn.getName().substring(0, workingOn.getName().length() - 7));
         unpacked = new UnpackedFRCFRG();
         try {
-            FragmentType me = unpacked.getByName(workingOn.getName().substring(0, workingOn.getName().length() - 7));
+            FragmentType me = unpacked.getByName(fragmentName.getText());
             if(me!=null)    colorSelection.setValue(me.color);
             fop = new FragmentsOnPane(designPane);
             fop.addStartAndEndCircles();
@@ -79,26 +82,65 @@ public class MakingFrgController implements Initializable {
         makingSave.setOnAction(e->{
             Fragment made = fop.toFragment();
             made.info.color = colorSelection.getValue();
-            made.info.name = workingOn.getName().substring(0, workingOn.getName().length() - 7);
-            System.out.println("HELLO!!");
+            made.info.name = fragmentName.getText();
+
             PackFRCFRG into = new PackFRCFRG(workingOn);
             try {
                 into.addTraitsFrom(made);
             } catch (IOException ex) { ex.printStackTrace(); }
         });
 
-        designPane.setOnMouseClicked(e ->{
-            if(e.getButton()== MouseButton.SECONDARY)
+
+        designPane.setOnMousePressed(e->{
+            switch(e.getButton())
             {
-                //TODO delete closest in range
-            };
+                case PRIMARY:
+                    originX = e.getX(); originY = e.getY();
+                break;
+                case SECONDARY:
+                    fop.deleteNearest(e.getX(),e.getY());
+                break;
+            }
         });
-      //  designPane.setOnMousePressed();
 
-       // designPane.setOnMouseReleased();
+       designPane.setOnMouseDragged(e->{
+           switch(e.getButton())
+           {
+               case PRIMARY:
+                   if(indicatorLine==null) {
+                       indicatorLine = new Line(originX, originY, e.getX(), e.getY());
+                       indicatorLine.setStrokeDashOffset(2);
+                       try {
+                           FragmentType f = unpacked.getByName(examplesController.getSelectedFrg().getText());
+                           indicatorLine.setStroke(f.color);
+                       } catch (FileNotFoundException ex) { ex.printStackTrace(); }
+                       designPane.getChildren().add(indicatorLine);
+                   } else {
+                       indicatorLine.setEndY(e.getY()); indicatorLine.setEndX(e.getX());
+                   }
+               break;
+           }
+       });
 
-       // designPane.setOnMouseDragged();
+       designPane.setOnMouseReleased(e->{
+           switch(e.getButton()) {
+               case PRIMARY:
+                   try {
+                       fop.add(new Fragment(
+                               indicatorLine.getStartX(), indicatorLine.getStartY(), indicatorLine.getEndX(), indicatorLine.getEndY(),
+                               unpacked.getByName(examplesController.getSelectedFrg().getText())
+                       ));
+                   } catch (FileNotFoundException ex) {
+                       ex.printStackTrace();
+                   }
+                   designPane.getChildren().remove(indicatorLine);
+                   indicatorLine=null;
+                break;
+           }
 
+       });
+
+       
 
     }
 
