@@ -5,6 +5,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import main.model.fractal.Fragment;
 import main.model.fractal.FragmentType;
 import main.model.math.Complex;
@@ -17,7 +19,12 @@ public class FragmentsOnPane {
 
 
     final static double deleteRange = 10;
-    boolean drawLabels = false;
+
+
+    public boolean drawLabels = false;
+    public boolean drawGrid = false;
+
+
 
     Circle startOf = new Circle(5.0, Color.web("#94b0c2"));
     Circle endOf = new Circle(5.0, Color.web("#ef7d57"));
@@ -29,6 +36,7 @@ public class FragmentsOnPane {
     ArrayList<Fragment> pieces = new ArrayList<>();
 
     public FragmentsOnPane(Pane on){ space = on; }
+
 
     public void addStartAndEndCircles()
     {
@@ -55,7 +63,20 @@ public class FragmentsOnPane {
         for (Fragment s: pieces) {
             Arrow drawn = new Arrow(s.spanFrom.real, s.spanFrom.imag, s.spanTo.real, s.spanTo.imag, 8);
             drawn.setFill(s.info.color);
+
             space.getChildren().add(drawn);
+            if(drawLabels)
+            {
+                Text text = new Text(s.info.name);
+                double rotate = Math.toDegrees(Math.atan2(s.spanTo.imag-s.spanFrom.imag, s.spanTo.real-s.spanFrom.real));
+                if(rotate<-90 || (rotate>=90 && rotate<270)) rotate+=180;
+                text.setRotate(rotate);
+                text.setFont(Font.font(11));
+                text.setStroke(s.info.color);
+                text.setX((s.spanFrom.real-10));
+                text.setY((s.spanFrom.imag));
+                space.getChildren().add(text);
+            }
         };
     };
 
@@ -89,6 +110,12 @@ public class FragmentsOnPane {
     public void add(Fragment x)
     {
         pieces.add(x);
+        refreshPane();
+    };
+
+    public void toggleLabels(boolean to)
+    {
+        drawLabels=to;
         refreshPane();
     };
 

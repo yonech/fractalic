@@ -141,6 +141,7 @@ public class MakingFrgController implements Initializable {
        });
 
 
+        checkBoxLabels.setOnAction(e->fop.toggleLabels(checkBoxLabels.isSelected()));
 
     }
 
