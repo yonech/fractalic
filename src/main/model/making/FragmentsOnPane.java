@@ -9,6 +9,7 @@ import main.model.fractal.Fragment;
 import main.model.fractal.FragmentType;
 import main.model.math.Complex;
 import main.model.math.Geometric;
+import main.model.shapes.Arrow;
 
 import java.util.ArrayList;
 
@@ -16,9 +17,10 @@ public class FragmentsOnPane {
 
 
     final static double deleteRange = 10;
+    boolean drawLabels = false;
 
-    Circle startOf = new Circle(5.0, Color.web("#b13e53"));
-    Circle endOf = new Circle(5.0, Color.web("#3b5dc9"));
+    Circle startOf = new Circle(5.0, Color.web("#94b0c2"));
+    Circle endOf = new Circle(5.0, Color.web("#ef7d57"));
 
     Pane space;
 
@@ -51,8 +53,8 @@ public class FragmentsOnPane {
         addStartAndEndCircles();
 
         for (Fragment s: pieces) {
-            Line drawn = new Line(s.spanFrom.real, s.spanFrom.imag, s.spanTo.real, s.spanTo.imag);
-            drawn.setStroke(s.info.color);
+            Arrow drawn = new Arrow(s.spanFrom.real, s.spanFrom.imag, s.spanTo.real, s.spanTo.imag, 8);
+            drawn.setFill(s.info.color);
             space.getChildren().add(drawn);
         };
     };

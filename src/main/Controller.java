@@ -20,6 +20,7 @@ import main.control.menu.MainMenuController;
 import main.model.fractal.FractalSetting;
 import main.model.fractal.Fragment;
 import main.model.frcfrg.UnpackedFRCFRG;
+import main.model.shapes.Arrow;
 
 
 import java.io.File;
@@ -69,6 +70,7 @@ public class Controller implements Initializable {
         graphicsContext= canvas.getGraphicsContext2D();
         fractalEnv = new FractalSetting(graphicsContext);
 
+        //canvasPane.getChildren().add(new Arrow(0,0,100,200));
         //graphicsContext.strokeLine(0,0,100,200);
         //FractalSetting fractalEnv = new FractalSetting(graphicsContext);
         //UnpackedFRCFRG unpackedFRCFRG = new UnpackedFRCFRG();
