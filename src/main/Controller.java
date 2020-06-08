@@ -15,6 +15,7 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.control.menu.MainMenuController;
 import main.model.fractal.FractalSetting;
@@ -56,11 +57,13 @@ public class Controller implements Initializable {
 
     FractalSetting fractalEnv;
 
-
+    double valCanvasWid, valCanvasHig;
 
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        valCanvasWid = canvas.getWidth();
+        valCanvasHig = canvas.getHeight();
 
         mainMenuController.injectController(this);
 
@@ -143,5 +146,14 @@ public class Controller implements Initializable {
     }
 
 
+    public void resizeCanvas(double w, double h)
+    {
+        canvas.setWidth(w);
+        canvas.setHeight(h);
+        canvasPane.setMinWidth(w);
+        canvasPane.setMinHeight(h);
+        canvasPane.setMaxWidth(w);
+        canvasPane.setMaxHeight(h);
+    };
 
 }

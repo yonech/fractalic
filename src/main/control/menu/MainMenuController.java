@@ -11,9 +11,11 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.WritableImage;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.Controller;
 import main.control.menu.examples.ExamplesController;
+import main.control.menu.properties.PropertiesController;
 
 import javax.imageio.ImageIO;
 import java.awt.image.RenderedImage;
@@ -33,12 +35,17 @@ public class MainMenuController implements Initializable {
     MenuItem menuOptFileSaveAs, menuOptFileSave;
     File saveToFile = null;
 
-
+    // File
     @FXML MenuItem menuOptFileNew;
 
+    @FXML MenuItem menuOptFileProperties;
     @FXML MenuItem menuOptFileClose;
 
     @FXML MenuItem menuOptToolsExample;
+
+    @FXML MenuItem menuOptEditClear;
+
+
 
     public void injectController(Controller controller) {
         this.controller = controller;
@@ -70,6 +77,7 @@ public class MainMenuController implements Initializable {
                 ExamplesController examplesController=loader.getController();
                 examplesController.injectController(controller);
                 Stage stage=new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
                 stage.setTitle("Examples");
                 stage.setScene(new Scene(root));
                 stage.show();
@@ -100,8 +108,36 @@ public class MainMenuController implements Initializable {
 
         menuOptFileClose.setOnAction(actionEvent -> Platform.exit());
 
-        // TODO make this different, Edit.Delete should do this
-        menuOptFileNew.setOnAction(actionEvent -> controller.graphicsContext.clearRect(0,0,controller.canvas.getWidth(),controller.canvas.getHeight()));
+
+
+        menuOptEditClear.setOnAction(actionEvent -> controller.graphicsContext.clearRect(0,0,controller.canvas.getWidth(),controller.canvas.getHeight()));
+
+
+
+
+
+        menuOptFileProperties.setOnAction(actionEvent -> {
+            try{
+                FXMLLoader loader= new FXMLLoader();
+                loader.setLocation(MainMenuController.class.getResource("properties/PropertiesView.fxml"));
+                Parent root= (Parent) loader.load();
+                PropertiesController propertiesController =loader.getController();
+                propertiesController.injectController(controller);
+                Stage stage=new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.setTitle("Properties");
+                stage.setScene(new Scene(root));
+                stage.show();
+
+            }catch(Exception e){
+                System.out.println("Unknown error");
+                e.printStackTrace();
+            }
+
+        });
+
+
+
     }
 
 }

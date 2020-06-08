@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -12,12 +13,16 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controller">
    <center>
-      <Pane fx:id="canvasPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-border-color: #94b0c2; -fx-border-width: 3;" BorderPane.alignment="CENTER">
-         <children>
-            <Pane fx:id="indicatorPane" prefHeight="601.0" prefWidth="798.0" />
-            <Canvas fx:id="canvas" height="600.0" width="800.0" />
-         </children>
-      </Pane>
+      <ScrollPane BorderPane.alignment="CENTER">
+         <content>
+            <Pane fx:id="canvasPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="816.0" style="-fx-border-color: #94b0c2; -fx-border-width: 3;">
+               <children>
+                  <Pane fx:id="indicatorPane" prefHeight="601.0" prefWidth="798.0" />
+                  <Canvas fx:id="canvas" height="600.0" width="800.0" />
+               </children>
+            </Pane>
+         </content>
+      </ScrollPane>
    </center>
    <top>
       <VBox BorderPane.alignment="CENTER">

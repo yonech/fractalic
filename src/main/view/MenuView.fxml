@@ -20,21 +20,23 @@
                   <KeyCodeCombination alt="UP" code="S" control="ANY" meta="UP" shift="ANY" shortcut="UP" />
                </accelerator>
             </MenuItem>
-            <MenuItem id="MenuFileSaveAs" fx:id="menuOptFileSettings" mnemonicParsing="false" text="Settings">
-               <accelerator>
-                  <KeyCodeCombination alt="UP" code="S" control="ANY" meta="UP" shift="ANY" shortcut="UP" />
-               </accelerator>
-            </MenuItem>
-            <MenuItem fx:id="menuOptFileClose" mnemonicParsing="false" text="Close">
-               <accelerator>
-                  <KeyCodeCombination alt="UP" code="S" control="ANY" meta="UP" shift="ANY" shortcut="UP" />
-               </accelerator>
-            </MenuItem>
+            <MenuItem id="MenuFileSaveAs" fx:id="menuOptFileProperties" mnemonicParsing="false" text="Properties" />
+            <MenuItem fx:id="menuOptFileClose" mnemonicParsing="false" text="Close" />
          </items>
       </Menu>
       <Menu mnemonicParsing="false" text="Edit">
          <items>
-            <MenuItem mnemonicParsing="false" text="Delete" />
+            <MenuItem fx:id="menuOptUndo" mnemonicParsing="false" text="Undo">
+               <accelerator>
+                  <KeyCodeCombination alt="UP" code="Z" control="ANY" meta="UP" shift="UP" shortcut="UP" />
+               </accelerator>
+            </MenuItem>
+            <MenuItem fx:id="menuOptRedo" mnemonicParsing="false" text="Redo">
+               <accelerator>
+                  <KeyCodeCombination alt="UP" code="Z" control="ANY" meta="UP" shift="ANY" shortcut="UP" />
+               </accelerator>
+            </MenuItem>
+            <MenuItem fx:id="menuOptEditClear" mnemonicParsing="false" text="Clear" />
          </items>
       </Menu>
       <Menu mnemonicParsing="false" text="Select">
@@ -44,7 +46,9 @@
       </Menu>
       <Menu mnemonicParsing="false" text="Tools">
          <items>
-            <MenuItem mnemonicParsing="false" text="Action 1" />
+            <MenuItem mnemonicParsing="false" text="Fractal draw" />
+            <MenuItem mnemonicParsing="false" text="Paintbrush" />
+            <MenuItem mnemonicParsing="false" text="Fill" />
          </items>
       </Menu>
       <Menu mnemonicParsing="false" text="Help">

@@ -15,12 +15,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
+import javafx.util.Pair;
 import main.control.menu.examples.ExamplesController;
 import main.model.fractal.Fragment;
 import main.model.fractal.FragmentType;
 import main.model.frcfrg.PackFRCFRG;
 import main.model.frcfrg.UnpackedFRCFRG;
 import main.model.making.FragmentsOnPane;
+import main.model.making.SnapToGrid;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -38,7 +40,7 @@ public class MakingFrgController implements Initializable {
 
     ExamplesController examplesController;
 
-
+    boolean unsaved = false;
     File workingOn;
 
     @FXML Text fragmentName;
@@ -80,6 +82,7 @@ public class MakingFrgController implements Initializable {
         });
 
         makingSave.setOnAction(e->{
+
             Fragment made = fop.toFragment();
             made.info.color = colorSelection.getValue();
             made.info.name = fragmentName.getText();
@@ -88,14 +91,20 @@ public class MakingFrgController implements Initializable {
             try {
                 into.addTraitsFrom(made);
             } catch (IOException ex) { ex.printStackTrace(); }
+
+            unsaved = false;
+            updateTitle();
         });
 
 
         designPane.setOnMousePressed(e->{
+            unsaved = true;
+            updateTitle();
             switch(e.getButton())
             {
                 case PRIMARY:
-                    originX = e.getX(); originY = e.getY();
+                    Pair<Double,Double> p = checkBoxGrid.isSelected() ? SnapToGrid.snapToNearest(e.getX(),e.getY()) : new Pair<>(e.getX(), e.getY());
+                    originX = p.getKey(); originY = p.getValue();
                 break;
                 case SECONDARY:
                     fop.deleteNearest(e.getX(),e.getY());
@@ -104,11 +113,17 @@ public class MakingFrgController implements Initializable {
         });
 
        designPane.setOnMouseDragged(e->{
+
+
            switch(e.getButton())
            {
+
                case PRIMARY:
+                   Pair<Double,Double> p = checkBoxGrid.isSelected() ? SnapToGrid.snapToNearest(e.getX(),e.getY()) : new Pair<>(e.getX(), e.getY());
+
                    if(indicatorLine==null) {
-                       indicatorLine = new Line(originX, originY, e.getX(), e.getY());
+
+                       indicatorLine = new Line(originX, originY, p.getKey(), p.getValue());
                        indicatorLine.setStrokeDashOffset(2);
                        try {
                            FragmentType f = unpacked.getByName(examplesController.getSelectedFrg().getText());
@@ -116,7 +131,7 @@ public class MakingFrgController implements Initializable {
                        } catch (FileNotFoundException ex) { ex.printStackTrace(); }
                        designPane.getChildren().add(indicatorLine);
                    } else {
-                       indicatorLine.setEndY(e.getY()); indicatorLine.setEndX(e.getX());
+                       indicatorLine.setEndY(p.getValue()); indicatorLine.setEndX(p.getKey());
                    }
                break;
            }
@@ -125,6 +140,8 @@ public class MakingFrgController implements Initializable {
        designPane.setOnMouseReleased(e->{
            switch(e.getButton()) {
                case PRIMARY:
+                  // Pair<Double,Double> p = checkBoxGrid.isSelected() ? SnapToGrid.snapToNearest(e.getX(),e.getY()) : new Pair<>(e.getX(), e.getY());
+
                    try {
                        fop.add(new Fragment(
                                indicatorLine.getStartX(), indicatorLine.getStartY(), indicatorLine.getEndX(), indicatorLine.getEndY(),
@@ -142,7 +159,14 @@ public class MakingFrgController implements Initializable {
 
 
         checkBoxLabels.setOnAction(e->fop.toggleLabels(checkBoxLabels.isSelected()));
-
+        checkBoxGrid.setOnAction(e->fop.toggleGrid(checkBoxGrid.isSelected()));
     }
+
+    void updateTitle()
+    {
+        if(unsaved) fragmentName.setText(workingOn.getName().substring(0, workingOn.getName().length() - 7) + " (unsaved)");
+        else        fragmentName.setText(workingOn.getName().substring(0, workingOn.getName().length() - 7));
+
+    };
 
 }

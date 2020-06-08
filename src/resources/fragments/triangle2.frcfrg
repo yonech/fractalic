@@ -5,3 +5,10 @@
  @ 0.23 0.39 0.005 0.005
  ] 
  [ COLOR 0x999900ff ] 
+
+ [ PATTERN 
+ triangle2 0.0 0.0 0.5 0.0
+ triangle2 0.5 0.0 0.25 0.445
+ triangle2 0.25 0.445 0.0 0.0
+ ] 
+ [ COLOR 0x999900ff ] 

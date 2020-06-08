@@ -19,6 +19,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import main.Controller;
 import main.control.making.MakingFrgController;
+import main.model.checks.NameChecks;
 import main.model.fractal.FractalSetting;
 import main.model.fractal.Fragment;
 import main.model.frcfrg.UnpackedFRCFRG;
@@ -90,17 +91,27 @@ public class ExamplesController implements Initializable {
         // Inserting new fragments
 
        newFractals.setOnKeyPressed(e->{
+
+           String name = newFractals.getText();
+
+
            if(!e.getCode().equals(KeyCode.ENTER)) return;
-            String name = newFractals.getText();
-            newFractals.setText("");
-            if(name.equals("")) return;
-            for(RadioButton r : buttonList) if(r.getText().equals(name))  return;
+           if(!NameChecks.properName(name,buttonList)) return;
+
            try {
                File file = new File("src/resources/fragments/"+name+".frcfrg");
                file.createNewFile();
+               newFractals.setText("");
+
            } catch (IOException ex) { ex.printStackTrace(); }
 
            makeButtonList();
+       });
+       newFractals.setOnKeyReleased(e->{
+
+           if(NameChecks.properName(newFractals.getText(),buttonList))      newFractals.setStyle("-fx-text-inner-color: black;");
+           else                                                             newFractals.setStyle("-fx-text-inner-color: red;");
+
        });
 
        // Removing existing fragments

@@ -17,13 +17,13 @@ import java.util.ArrayList;
 
 public class FragmentsOnPane {
 
+    final public static double gridInterval = 50;
+    final public static double horOffset = 0, verOffset = 20;
 
     final static double deleteRange = 10;
 
-
     public boolean drawLabels = false;
     public boolean drawGrid = false;
-
 
 
     Circle startOf = new Circle(5.0, Color.web("#94b0c2"));
@@ -35,7 +35,7 @@ public class FragmentsOnPane {
     Fragment base = new Fragment(150,220,350,220, null);
     ArrayList<Fragment> pieces = new ArrayList<>();
 
-    public FragmentsOnPane(Pane on){ space = on; }
+    public FragmentsOnPane(Pane on){ space = on;  }
 
 
     public void addStartAndEndCircles()
@@ -57,7 +57,11 @@ public class FragmentsOnPane {
 
     public void refreshPane()
     {
+
         space.getChildren().clear();
+
+        if(drawGrid) drawingGrid();
+
         addStartAndEndCircles();
 
         for (Fragment s: pieces) {
@@ -118,5 +122,30 @@ public class FragmentsOnPane {
         drawLabels=to;
         refreshPane();
     };
+
+    public void toggleGrid(boolean to)
+    {
+        drawGrid=to;
+        refreshPane();
+    };
+
+    void drawingGrid()
+    {
+        for(double x=horOffset; x<space.getWidth(); x+=gridInterval)
+        {
+            Line gridLine = new Line(x,0,x,space.getHeight());
+            gridLine.setStroke(Color.web("#94b0c2"));
+            space.getChildren().add(gridLine);
+        };
+
+        for(double y=verOffset; y<space.getHeight(); y+=gridInterval)
+        {
+            Line gridLine = new Line(0,y,space.getWidth(),y);
+            gridLine.setStroke(Color.web("#94b0c2"));
+            space.getChildren().add(gridLine);
+        };
+
+    };
+
 
 }

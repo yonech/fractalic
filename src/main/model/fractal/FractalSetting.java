@@ -1,8 +1,11 @@
 package main.model.fractal;
 
+import javafx.scene.Node;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
+import javax.sound.sampled.Line;
 import java.awt.*;
 
 /**
@@ -18,6 +21,7 @@ public class FractalSetting {
     public int depth=4;
 
     GraphicsContext space;
+    Pane placeOn = new Pane();
 
     public FractalSetting(GraphicsContext space)
     {
@@ -25,10 +29,9 @@ public class FractalSetting {
     };
     public void setDepth(int x){ depth = x; }
 
-    public void drawFractal(Fragment start)
-    {
-        drawingFractal(0,start);
-    };
+    public void drawFractal(Fragment start) {
+        drawingFractal(0, start);
+    }
 
 
     private void drawingFractal(int depth, Fragment frag)

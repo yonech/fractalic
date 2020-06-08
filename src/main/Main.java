@@ -8,6 +8,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
@@ -20,6 +21,7 @@ public class Main extends Application {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Fractalic");
         showMainView();
+
     }
     private void showMainView() throws Exception{
         FXMLLoader loader = new FXMLLoader();
@@ -30,6 +32,7 @@ public class Main extends Application {
         Scene scene = new Scene(mainLayout);
         primaryStage.setScene(scene);
         primaryStage.show();
+
 
         //  Passing primaryStage to Controller
        // Controller controller = loader.getController();
