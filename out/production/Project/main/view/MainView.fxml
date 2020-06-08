@@ -10,14 +10,15 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controller">
    <center>
       <ScrollPane BorderPane.alignment="CENTER">
          <content>
-            <Pane fx:id="canvasPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="816.0" style="-fx-border-color: #94b0c2; -fx-border-width: 3;">
+            <Pane fx:id="canvasPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-border-color: #94b0c2; -fx-border-width: 3;">
                <children>
-                  <Pane fx:id="indicatorPane" prefHeight="601.0" prefWidth="798.0" />
+                  <Pane fx:id="indicatorPane" prefHeight="603.0" prefWidth="803.0" />
                   <Canvas fx:id="canvas" height="600.0" width="800.0" />
                </children>
             </Pane>
@@ -35,7 +36,12 @@
    <bottom>
       <HBox alignment="CENTER_RIGHT" prefHeight="45.0" prefWidth="596.0" BorderPane.alignment="CENTER">
          <children>
-            <Spinner fx:id="depthSpinner" prefHeight="25.0" prefWidth="82.0" />
+            <AnchorPane prefHeight="45.0" prefWidth="197.0">
+               <children>
+                  <Spinner fx:id="depthSpinner" layoutX="115.0" layoutY="10.0" prefHeight="25.0" prefWidth="82.0" />
+                  <Text fill="#333c57" layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recursion depth" />
+               </children>
+            </AnchorPane>
             <ColorPicker fx:id="colorPicker">
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" top="10.0" />

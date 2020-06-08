@@ -18,6 +18,7 @@ import main.control.menu.examples.ExamplesController;
 import main.control.menu.properties.PropertiesController;
 
 import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
@@ -37,7 +38,7 @@ public class MainMenuController implements Initializable {
 
     // File
     @FXML MenuItem menuOptFileNew;
-
+    @FXML MenuItem menuOptFileOpen;
     @FXML MenuItem menuOptFileProperties;
     @FXML MenuItem menuOptFileClose;
 
@@ -136,8 +137,30 @@ public class MainMenuController implements Initializable {
 
         });
 
+        menuOptFileOpen.setOnAction(actionEvent -> {
+            FileChooser fileChooser = new FileChooser();
+
+            FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("png files (*.png)","*.png");
+            fileChooser.getExtensionFilters().add(extensionFilter);
+
+            File chosenFile = fileChooser.showOpenDialog(controller.primaryStage);
+            if(chosenFile != null) openCanvas(chosenFile);
+        });
+
+    }
 
 
+    void openCanvas(File chosenFile){
+        try {
+            BufferedImage bufferedImage =ImageIO.read(chosenFile);
+            WritableImage writableImage=SwingFXUtils.toFXImage(bufferedImage,null);
+            controller.resizeCanvas(writableImage.getWidth(),writableImage.getHeight());
+            controller.graphicsContext.drawImage(writableImage,0,0);
+            saveToFile = chosenFile;
+
+        } catch(IOException eio){
+            Logger.getLogger(MainMenuController.class.getName()).log(Level.SEVERE,null,eio);
+        }
     }
 
 }

@@ -96,7 +96,8 @@ public class ExamplesController implements Initializable {
 
 
            if(!e.getCode().equals(KeyCode.ENTER)) return;
-           if(!NameChecks.properName(name,buttonList)) return;
+
+           if(!NameChecks.properNameErrors(name,buttonList)) return;
 
            try {
                File file = new File("src/resources/fragments/"+name+".frcfrg");

@@ -77,6 +77,9 @@ public class MakingFrgController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+
+
         makingClose.setOnAction(e->{
             examplesController.returnToCanvas();
         });

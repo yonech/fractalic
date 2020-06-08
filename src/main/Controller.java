@@ -66,7 +66,7 @@ public class Controller implements Initializable {
         valCanvasHig = canvas.getHeight();
 
         mainMenuController.injectController(this);
-
+        indicatorPane.setViewOrder(-50);
         //dragLine.setOnMouseDragged(e->{dragLine.se});
         //depthSpinner.getValueFactory().setValue(5);
 
@@ -136,7 +136,7 @@ public class Controller implements Initializable {
 
         UnpackedFRCFRG unpackedFRCFRG = new UnpackedFRCFRG();
 
-        canvas.setOnMouseReleased( e-> {
+        canvasPane.setOnMouseReleased( e-> {
             indicatorPane.getChildren().clear();
             try {
                 fractalEnv.setDepth(depthSpinner.getValueFactory().getValue());
@@ -150,10 +150,14 @@ public class Controller implements Initializable {
     {
         canvas.setWidth(w);
         canvas.setHeight(h);
-        canvasPane.setMinWidth(w);
-        canvasPane.setMinHeight(h);
-        canvasPane.setMaxWidth(w);
-        canvasPane.setMaxHeight(h);
+        canvasPane.setMinWidth(w+3);
+        canvasPane.setMinHeight(h+3);
+        canvasPane.setMaxWidth(w+3);
+        canvasPane.setMinHeight(h+3);
+        indicatorPane.setMinHeight(h+3);
+        indicatorPane.setMinWidth(w+3);
+        indicatorPane.setMaxHeight(h+3);
+        indicatorPane.setMaxWidth(w+3);
     };
 
 }
