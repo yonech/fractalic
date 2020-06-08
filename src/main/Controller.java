@@ -27,6 +27,7 @@ import main.model.shapes.Arrow;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
@@ -70,7 +71,11 @@ public class Controller implements Initializable {
         //dragLine.setOnMouseDragged(e->{dragLine.se});
         //depthSpinner.getValueFactory().setValue(5);
 
+
+
+
         graphicsContext= canvas.getGraphicsContext2D();
+        graphicsContext.save();
         fractalEnv = new FractalSetting(graphicsContext);
 
         //canvasPane.getChildren().add(new Arrow(0,0,100,200));
@@ -141,6 +146,7 @@ public class Controller implements Initializable {
             try {
                 fractalEnv.setDepth(depthSpinner.getValueFactory().getValue());
                 fractalEnv.drawFractal(new Fragment(originX,originY,e.getX(),e.getY(),unpackedFRCFRG.getByName(chosenFractal)));
+                graphicsContext.save();
             } catch (FileNotFoundException ignored){};
         });
     }

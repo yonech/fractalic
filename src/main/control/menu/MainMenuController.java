@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.WritableImage;
@@ -45,8 +46,6 @@ public class MainMenuController implements Initializable {
     @FXML MenuItem menuOptToolsExample;
 
     @FXML MenuItem menuOptEditClear;
-
-
 
     public void injectController(Controller controller) {
         this.controller = controller;
@@ -113,7 +112,7 @@ public class MainMenuController implements Initializable {
 
         menuOptEditClear.setOnAction(actionEvent -> controller.graphicsContext.clearRect(0,0,controller.canvas.getWidth(),controller.canvas.getHeight()));
 
-
+        menuOptFileNew.setOnAction(e -> menuOptEditClear.getOnAction());
 
 
 
@@ -136,6 +135,8 @@ public class MainMenuController implements Initializable {
             }
 
         });
+
+
 
         menuOptFileOpen.setOnAction(actionEvent -> {
             FileChooser fileChooser = new FileChooser();

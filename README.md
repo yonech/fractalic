@@ -14,3 +14,9 @@ __Projekt będzie zawierał:__
     * Wyboru głębokości rekursji
     * Możliwości wybrania i przeciągnięcia przez główny obszar roboczy jednego z utworzonych fragmentów, aby narysować fraktal według zdefiniowanych powyższymi narzędziami zasad.
     
+
+    
+    
+__Uruchomienie projektu__
+
+Projekt jest modułem .iml Intellij IDEA

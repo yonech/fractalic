@@ -1,0 +1,18 @@
+To create a fractal choose Select > Fractal
+
+Input names into the text field to create new fractals.
+
+
+When you select Edit, you can define how your fractal looks in each recursive step.
+
+The grey and orange dot represent the beginning and end of the edited type.
+
+The arrows represent what the fractal changes to in each recursive step.
+
+To add arrows, select one of the fragment types and drag your mouse across the screen.
+
+To delete an arrow right click on it.
+
+
+
+To draw a fractal just drag your mouse from its beginning to its end on the canvas.

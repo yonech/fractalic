@@ -27,16 +27,6 @@
       </Menu>
       <Menu mnemonicParsing="false" text="Edit">
          <items>
-            <MenuItem fx:id="menuOptUndo" mnemonicParsing="false" text="Undo">
-               <accelerator>
-                  <KeyCodeCombination alt="UP" code="Z" control="ANY" meta="UP" shift="UP" shortcut="UP" />
-               </accelerator>
-            </MenuItem>
-            <MenuItem fx:id="menuOptRedo" mnemonicParsing="false" text="Redo">
-               <accelerator>
-                  <KeyCodeCombination alt="UP" code="Z" control="ANY" meta="UP" shift="ANY" shortcut="UP" />
-               </accelerator>
-            </MenuItem>
             <MenuItem fx:id="menuOptEditClear" mnemonicParsing="false" text="Clear" />
          </items>
       </Menu>
@@ -44,18 +34,6 @@
         <items>
           <MenuItem fx:id="menuOptToolsExample" mnemonicParsing="false" text="Fractal" />
         </items>
-      </Menu>
-      <Menu mnemonicParsing="false" text="Tools">
-         <items>
-            <MenuItem mnemonicParsing="false" text="Fractal draw" />
-            <MenuItem mnemonicParsing="false" text="Paintbrush" />
-            <MenuItem mnemonicParsing="false" text="Fill" />
-         </items>
-      </Menu>
-      <Menu mnemonicParsing="false" text="Help">
-         <items>
-            <MenuItem mnemonicParsing="false" text="About" />
-         </items>
       </Menu>
   </menus>
 </MenuBar>
